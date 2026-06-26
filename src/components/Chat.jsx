@@ -13,7 +13,7 @@ function Welcome({ quickAsk }) {
     'Intubation difficile algorithme'
   ];
   return (
-    <div id="welcome" class="flex flex-col items-center justify-center text-center py-8 max-w-lg mx-auto">
+    <div id="welcome" class="flex flex-col items-center justify-center text-center py-4 sm:py-8 max-w-lg mx-auto">
       <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-3xl font-bold text-white mb-6 shadow-lg shadow-amber-500/20">A</div>
       <h2 class="font-serif text-[20px] sm:text-[26px] text-[#1A1612] mb-3">Bonjour, je suis AnesIA</h2>
       <p class="text-[15px] text-[#8C7E6E] leading-relaxed mb-8">Votre assistant IA specialise en anesthesie-reanimation.</p>
@@ -50,7 +50,7 @@ function Message({ role, html }) {
         {isAi ? 'A' : 'U'}
       </div>
       <div class="flex flex-col gap-1 max-w-[80%]">
-        <div class={`px-4 py-3 rounded-2xl text-sm leading-relaxed ${isAi ? 'msg-ai text-[#1A1612]' : 'msg-user'}`} dangerouslySetInnerHTML={{ __html: html }} />
+        <div class={`px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl text-sm leading-relaxed ${isAi ? 'msg-ai text-[#1A1612]' : 'msg-user'}`} dangerouslySetInnerHTML={{ __html: html }} />
         <div class={`text-[10px] text-[#8C7E6E] px-1 ${isAi ? '' : 'text-right'}`}>{now}</div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export function Chat({ history, isLoading, quickAsk }) {
   }, [history, isLoading]);
 
   return (
-    <div ref={scrollRef} class="flex-1 overflow-y-auto px-4 py-6 space-y-4 lg:px-8">
+    <div ref={scrollRef} class="flex-1 overflow-y-auto px-3 sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4 lg:px-8">
       {history.length === 0 && !isLoading && <Welcome quickAsk={quickAsk} />}
       {history.map((m, i) => (
         <Message key={i} role={m.role === 'user' ? 'user' : 'ai'} html={m.role === 'user' ? m.content : renderMarkdown(m.content)} />

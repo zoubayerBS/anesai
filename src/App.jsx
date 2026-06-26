@@ -118,12 +118,12 @@ export default function App() {
   if (!ready) return null;
 
   return (
-    <div class="bg-mesh text-[#1A1612] min-h-dvh overflow-hidden">
+    <div class="bg-mesh text-[#1A1612] h-full overflow-hidden">
       <div class="bg-orb orb-1" />
       <div class="bg-orb orb-2" />
       <div class="bg-orb orb-3" />
 
-      <div class="relative z-10 flex h-dvh">
+      <div class="relative z-10 flex h-full">
         {sidebarOpen && <div class="sidebar-overlay fixed inset-0 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
 
         <Sidebar
@@ -141,7 +141,7 @@ export default function App() {
         <div class="flex-1 flex flex-col overflow-hidden min-w-0">
           <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-          <div class="text-amber-700/80 bg-amber-50/60 backdrop-blur-sm text-center text-[11px] px-4 py-2 shrink-0 border-b border-amber-200/50 font-medium">
+          <div class="text-amber-700/80 bg-amber-50/60 backdrop-blur-sm text-center text-[10px] sm:text-[11px] px-3 sm:px-4 py-1.5 sm:py-2 shrink-0 border-b border-amber-200/50 font-medium">
             <strong>Avertissement :</strong> Aide a la decision uniquement. Jugement clinique requis.
           </div>
 

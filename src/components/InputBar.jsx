@@ -75,7 +75,7 @@ export function InputBar({
   };
 
   return (
-    <div class="px-3 pb-3 pt-1 shrink-0">
+    <div class="px-2 sm:px-3 pb-2 sm:pb-3 pt-1 shrink-0">
       <div class="max-w-3xl mx-auto">
         <div
           style={{
