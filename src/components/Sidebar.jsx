@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 export function Sidebar({ isOpen, onClose, chats, activeChatId, onNewChat, onLoadChat, onDeleteChat, onOpenPatient, onOpenPreVisit }) {
   return (
-    <aside class={`sidebar ${isOpen ? '' : 'closed'} lg:!transform-none w-72 shrink-0 flex flex-col h-full glass-strong border-r border-black/5 z-40`}>
+    <aside class={`sidebar ${isOpen ? '' : 'closed'} w-64 sm:w-72 shrink-0 flex flex-col h-full glass-strong border-r border-black/5 z-40`}>
       <div class="p-3 border-b border-black/5 flex items-center gap-2">
         <button onClick={onNewChat} class="flex-1 flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/60 transition text-left">
           <svg class="w-5 h-5 text-[#8C7E6E]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>

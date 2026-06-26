@@ -27,11 +27,11 @@ export function PatientModal({ patient, onSave, onClose }) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div class="glass-strong rounded-3xl p-6 w-full max-w-md fade-up">
+      <div class="glass-strong rounded-3xl p-4 sm:p-6 w-full max-w-md fade-up">
         <h3 class="font-serif text-[22px] text-[#1A1612] mb-5">
           Contexte Patient
         </h3>
-        <div class="grid grid-cols-2 gap-3 mb-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
           <Field
             label="Age"
             value={form.age}

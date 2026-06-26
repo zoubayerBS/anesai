@@ -15,7 +15,7 @@ function Welcome({ quickAsk }) {
   return (
     <div id="welcome" class="flex flex-col items-center justify-center text-center py-8 max-w-lg mx-auto">
       <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-3xl font-bold text-white mb-6 shadow-lg shadow-amber-500/20">A</div>
-      <h2 class="font-serif text-[26px] text-[#1A1612] mb-3">Bonjour, je suis AnesIA</h2>
+      <h2 class="font-serif text-[20px] sm:text-[26px] text-[#1A1612] mb-3">Bonjour, je suis AnesIA</h2>
       <p class="text-[15px] text-[#8C7E6E] leading-relaxed mb-8">Votre assistant IA specialise en anesthesie-reanimation.</p>
       <div class="w-full mt-2 overflow-hidden" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         <div class={`marquee-track flex gap-2 pb-2 ${paused ? 'paused' : ''}`}>

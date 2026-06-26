@@ -361,8 +361,8 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
     <div class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
       <div class="glass-strong rounded-3xl w-full max-w-3xl max-h-[90dvh] flex flex-col fade-up">
         {/* Header */}
-        <div class="px-6 py-4 border-b border-black/5 flex items-center justify-between shrink-0">
-          <h2 class="text-lg font-semibold text-[#1A1612]">
+        <div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-black/5 flex items-center justify-between shrink-0">
+          <h2 class="text-base sm:text-lg font-semibold text-[#1A1612]">
             Visite Pre-Anesthesique
           </h2>
           <button
@@ -402,10 +402,10 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
         </div>
 
         {/* Content */}
-        <div class="flex-1 overflow-y-auto px-6 py-5">
+        <div class="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-5">
           {/* Tab 0 - Identite */}
           {activeTab === 0 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Field
                 label="Nom"
                 id="pv_nom"
@@ -501,7 +501,7 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
 
           {/* Tab 1 - Antecedents */}
           {activeTab === 1 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="col-span-2">
                 <Field
                   label="ATCD Medicaux"
@@ -602,7 +602,7 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
 
           {/* Tab 2 - Voies Aeriennes */}
           {activeTab === 2 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <SelectField
                 label="Mallampati"
                 id="pv_mallampati"
@@ -696,7 +696,7 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
 
           {/* Tab 3 - Cardio-Respiratoire */}
           {activeTab === 3 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Field
                 label="TA Systolique (mmHg)"
                 id="pv_tas"
@@ -818,7 +818,7 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
 
           {/* Tab 4 - Biologie & Scores */}
           {activeTab === 4 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Field
                 label="Hb (g/dL)"
                 id="pv_hb"
@@ -963,7 +963,7 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
 
           {/* Tab 5 - Plan & Consentement */}
           {activeTab === 5 && (
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="col-span-2">
                 <SelectField
                   label="Technique anesthesique"
@@ -1092,9 +1092,9 @@ export default function PreVisitModal({ onClose, onSendToChat }) {
         </div>
 
         {/* Footer */}
-        <div class="px-6 py-4 border-t border-black/5 flex gap-3 justify-between shrink-0">
+        <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-black/5 flex flex-wrap gap-2 sm:gap-3 justify-between shrink-0">
           <button
-            class="btn-outline px-4 py-2.5 rounded-xl text-sm text-[#D97706] flex items-center gap-2"
+            class="btn-outline px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm text-[#D97706] flex items-center gap-2"
             onClick={handleExport}
           >
             <svg
