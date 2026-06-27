@@ -1,20 +1,20 @@
-import { h } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
-import { Sidebar } from './components/Sidebar';
-import { Header } from './components/Header';
-import { Chat } from './components/Chat';
-import { InputBar } from './components/InputBar';
-import { PatientModal } from './components/PatientModal';
-import PreVisitModal from './components/PreVisitModal';
-import { ApiKeyModal } from './components/ApiKeyModal';
-import { store } from './lib/store';
-import { CONFIG } from './lib/config';
+import { h } from "preact";
+import { useState, useEffect } from "preact/hooks";
+import { Sidebar } from "./components/Sidebar";
+import { Header } from "./components/Header";
+import { Chat } from "./components/Chat";
+import { InputBar } from "./components/InputBar";
+import { PatientModal } from "./components/PatientModal";
+import PreVisitModal from "./components/PreVisitModal";
+import { ApiKeyModal } from "./components/ApiKeyModal";
+import { store } from "./lib/store";
+import { CONFIG } from "./lib/config";
 
 export default function App() {
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState("");
   const [patient, setPatient] = useState({});
   const [chats, setChats] = useState([]);
-  const [activeChatId, setActiveChatId] = useState('');
+  const [activeChatId, setActiveChatId] = useState("");
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function App() {
       if (!key) store.setApiKey(finalKey);
       setApiKey(finalKey);
       setPatient(pat || {});
-      setActiveChatId(id || '');
+      setActiveChatId(id || "");
       setChats(chatList || []);
       setReady(true);
       if (!finalKey) setShowApiModal(true);
@@ -55,14 +55,14 @@ export default function App() {
   };
 
   const newChat = () => {
-    setActiveChatId('');
+    setActiveChatId("");
     setHistory([]);
-    store.setActiveChatId('');
+    store.setActiveChatId("");
     setSidebarOpen(false);
   };
 
   const loadChat = (id) => {
-    const chat = chats.find(c => c.id === id);
+    const chat = chats.find((c) => c.id === id);
     if (!chat) return;
     setActiveChatId(id);
     store.setActiveChatId(id);
@@ -72,27 +72,37 @@ export default function App() {
 
   const deleteChat = async (id) => {
     await store.deleteChat(id);
-    setChats(prev => prev.filter(c => c.id !== id));
+    setChats((prev) => prev.filter((c) => c.id !== id));
     if (activeChatId === id) newChat();
   };
 
   const autoSave = async (hist) => {
     let currentId = activeChatId;
     if (!currentId) {
-      currentId = 'chat_' + Date.now();
+      currentId = "chat_" + Date.now();
       setActiveChatId(currentId);
       store.setActiveChatId(currentId);
     }
-    let firstUser = 'Nouvelle conversation';
+    let firstUser = "Nouvelle conversation";
     for (const m of hist) {
-      if (m.role === 'user') { firstUser = m.content; break; }
+      if (m.role === "user") {
+        firstUser = m.content;
+        break;
+      }
     }
-    const title = firstUser.substring(0, 40) + (firstUser.length > 40 ? '...' : '');
-    const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const title =
+      firstUser.substring(0, 40) + (firstUser.length > 40 ? "..." : "");
+    const date = new Date().toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     const chat = { id: currentId, title, date, history: hist };
     await store.setChats(chat);
-    setChats(prev => {
-      const idx = prev.findIndex(c => c.id === currentId);
+    setChats((prev) => {
+      const idx = prev.findIndex((c) => c.id === currentId);
       if (idx >= 0) {
         const next = [...prev];
         next[idx] = chat;
@@ -103,13 +113,16 @@ export default function App() {
   };
 
   const quickAsk = (text) => {
-    const input = document.getElementById('userInput');
+    const input = document.getElementById("userInput");
     if (input) {
       input.value = text;
-      input.dispatchEvent(new Event('input'));
+      input.dispatchEvent(new Event("input"));
       input.focus();
       setTimeout(() => {
-        const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+        const enterEvent = new KeyboardEvent("keydown", {
+          key: "Enter",
+          bubbles: true,
+        });
         input.dispatchEvent(enterEvent);
       }, 50);
     }
@@ -124,7 +137,12 @@ export default function App() {
       <div class="bg-orb orb-3" />
 
       <div class="relative z-10 flex h-full">
-        {sidebarOpen && <div class="sidebar-overlay fixed inset-0 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+        {sidebarOpen && (
+          <div
+            class="sidebar-overlay fixed inset-0 z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
         <Sidebar
           isOpen={sidebarOpen}
@@ -142,10 +160,13 @@ export default function App() {
           <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
           <div class="text-amber-700/80 bg-amber-50/60 backdrop-blur-sm text-center text-[10px] sm:text-[11px] px-3 sm:px-4 py-1.5 sm:py-2 shrink-0 border-b border-amber-200/50 font-medium">
-            <strong>Avertissement :</strong> Aide a la decision uniquement. Jugement clinique requis.
+            <strong>Avertissement :</strong> Aide a la decision uniquement.
+            Jugement clinique requis.
           </div>
 
-          <Chat history={history} isLoading={isLoading} quickAsk={quickAsk} />
+          <div class="flex-1 overflow-y-auto">
+            <Chat history={history} isLoading={isLoading} quickAsk={quickAsk} />
+          </div>
 
           <InputBar
             history={history}
@@ -174,16 +195,17 @@ export default function App() {
           onSendToChat={(text) => {
             setShowPreVisitModal(false);
             setTimeout(() => {
-              const input = document.getElementById('userInput');
-              if (input) { input.value = text; input.dispatchEvent(new Event('input')); }
+              const input = document.getElementById("userInput");
+              if (input) {
+                input.value = text;
+                input.dispatchEvent(new Event("input"));
+              }
             }, 100);
           }}
         />
       )}
 
-      {showApiModal && (
-        <ApiKeyModal onSave={saveApiKey} />
-      )}
+      {showApiModal && <ApiKeyModal onSave={saveApiKey} />}
     </div>
   );
 }

@@ -8,8 +8,8 @@
 
 body {
     font-family: "Anthropic Sans", Arial, sans-serif;
-    min-height: 100dvh;
-    min-height: var(--app-height, 100dvh);
+    min-height: 100vh;
+    height: 100vh;
     overflow: hidden;
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
         env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -17,8 +17,12 @@ body {
     position: fixed;
     inset: 0;
     width: 100%;
+}
+
+#app {
     height: 100%;
-    height: var(--app-height, 100dvh);
+    display: flex;
+    flex-direction: column;
 }
 
 :root {
@@ -203,10 +207,18 @@ body {
     margin: 18px 0 8px;
     line-height: 1.3;
 }
-.bubble-content h1 { font-size: 18px; }
-.bubble-content h2 { font-size: 17px; }
-.bubble-content h3 { font-size: 16px; }
-.bubble-content h4 { font-size: 15px; }
+.bubble-content h1 {
+    font-size: 18px;
+}
+.bubble-content h2 {
+    font-size: 17px;
+}
+.bubble-content h3 {
+    font-size: 16px;
+}
+.bubble-content h4 {
+    font-size: 15px;
+}
 .bubble-content h1:first-child,
 .bubble-content h2:first-child,
 .bubble-content h3:first-child,
