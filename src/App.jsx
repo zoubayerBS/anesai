@@ -168,16 +168,18 @@ export default function App() {
             <Chat history={history} isLoading={isLoading} quickAsk={quickAsk} />
           </div>
 
-          <InputBar
-            history={history}
-            setHistory={setHistory}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            apiKey={apiKey}
-            patient={patient}
-            onShowApiModal={() => setShowApiModal(true)}
-            onAutoSave={autoSave}
-          />
+          <div class="shrink-0">
+            <InputBar
+              history={history}
+              setHistory={setHistory}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              apiKey={apiKey}
+              patient={patient}
+              onShowApiModal={() => setShowApiModal(true)}
+              onAutoSave={autoSave}
+            />
+          </div>
         </div>
       </div>
 
