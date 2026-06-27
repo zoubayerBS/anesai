@@ -8,29 +8,34 @@
 
 body {
     font-family: "Anthropic Sans", Arial, sans-serif;
-    /* dvh = dynamic viewport height : se recalcule quand la barre Safari se masque */
     height: 100dvh;
     min-height: 100dvh;
     overflow: hidden;
-    /* PAS de padding ici — le safe-area est géré par #app */
     margin: 0;
     position: fixed;
     inset: 0;
     width: 100%;
     touch-action: manipulation;
-    /* Empêche le zoom sur double-tap sur iOS */
     -webkit-text-size-adjust: 100%;
+    /* PWA iOS : étend la couleur de fond sous la barre home indicator */
+    background-color: #faf9f6;
 }
 
 #app {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* Safe-area appliqués ici pour que les enfants en héritent correctement */
+    /* safe-area top et côtés seulement — le bottom est géré par .input-safe-bottom */
     padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+    /* PAS de padding-bottom ici : ça crée une marge blanche en PWA */
+}
+
+/* Zone InputBar — ajouter ce padding-bottom sur le composant shrink-0 qui contient InputBar */
+.input-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+    /* La couleur de fond de l'InputBar se prolonge naturellement sous le home indicator */
 }
 
 :root {

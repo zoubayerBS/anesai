@@ -172,7 +172,7 @@ export default function App() {
             <Chat history={history} isLoading={isLoading} quickAsk={quickAsk} />
           </div>
 
-          <div class="shrink-0">
+          <div class="shrink-0 input-safe-bottom">
             <InputBar
               history={history}
               setHistory={setHistory}
