@@ -131,7 +131,11 @@ export default function App() {
   if (!ready) return null;
 
   return (
-    <div class="bg-mesh text-[#1A1612] h-full overflow-hidden">
+    <div
+      class="bg-mesh text-[#1A1612] overflow-hidden"
+      style="height:100%;height:100dvh;"
+    >
+      {/* dvh pour iOS Safari */}
       <div class="bg-orb orb-1" />
       <div class="bg-orb orb-2" />
       <div class="bg-orb orb-3" />

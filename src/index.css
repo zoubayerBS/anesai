@@ -8,25 +8,29 @@
 
 body {
     font-family: "Anthropic Sans", Arial, sans-serif;
-    min-height: 100vh;
-    height: 100vh;
+    /* dvh = dynamic viewport height : se recalcule quand la barre Safari se masque */
+    height: 100dvh;
+    min-height: 100dvh;
     overflow: hidden;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-        env(safe-area-inset-bottom) env(safe-area-inset-left);
+    /* PAS de padding ici — le safe-area est géré par #app */
     margin: 0;
     position: fixed;
     inset: 0;
     width: 100%;
-    touch-action: manipulation; /* Empêche les conflits avec le clavier virtuel */
+    touch-action: manipulation;
+    /* Empêche le zoom sur double-tap sur iOS */
+    -webkit-text-size-adjust: 100%;
 }
 
 #app {
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: calc(
-        100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-    );
+    /* Safe-area appliqués ici pour que les enfants en héritent correctement */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 :root {
@@ -435,7 +439,7 @@ body {
     .sidebar {
         position: fixed;
         z-index: 40;
-        height: 100vh;
+        height: 100dvh; /* dvh au lieu de vh pour iOS */
         width: 80%;
         max-width: 300px;
     }
@@ -446,11 +450,9 @@ body {
         background: rgba(0, 0, 0, 0.3);
     }
 
-    /* S'assurer que le contenu principal reste visible sur mobile */
+    /* Contenu principal — pleine largeur sur mobile */
     #app > div > div {
-        width: calc(
-            100% - env(safe-area-inset-left) - env(safe-area-inset-right)
-        );
+        width: 100%;
         max-width: 100%;
     }
 }
@@ -496,4 +498,50 @@ body {
 #preVisitModal input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* ============================================================
+   iOS / iPhone — Corrections spécifiques
+   ============================================================ */
+
+/* Empêche le zoom automatique sur les inputs (iOS zoome si font-size < 16px) */
+input,
+textarea,
+select {
+    font-size: 16px !important;
+}
+
+/* Inputs dans les modales et formulaires — cohérence */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea {
+    -webkit-appearance: none;
+    border-radius: 0; /* Évite les arrondis iOS par défaut */
+}
+
+/* Clavier virtuel iOS : Interactive Widget API (iOS 15.4+)
+   Permet à l'InputBar de remonter correctement quand le clavier s'ouvre */
+@supports (height: 100dvh) {
+    body {
+        height: 100dvh;
+    }
+    #app {
+        height: 100dvh;
+    }
+    .sidebar {
+        height: 100dvh;
+    }
+}
+
+/* Réduction des animations si l'utilisateur le préfère */
+@media (prefers-reduced-motion: reduce) {
+    .bg-mesh,
+    .orb-1,
+    .orb-2,
+    .orb-3,
+    .marquee-track,
+    .fade-up {
+        animation: none !important;
+    }
 }
